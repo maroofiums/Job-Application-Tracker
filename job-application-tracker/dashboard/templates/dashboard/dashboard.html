@@ -1,0 +1,363 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | JobTrack{% endblock %}
+
+{% block content %}
+
+<div class="container py-4 py-lg-5">
+
+    <!-- Header -->
+
+    <div class="d-flex flex-column flex-md-row
+                justify-content-between
+                align-items-md-center
+                gap-3
+                mb-4">
+
+        <div>
+
+            <h1 class="fw-bold mb-1">
+                Dashboard
+            </h1>
+
+            <p class="text-muted mb-0">
+                Welcome back, {{ user.username }}.
+                Here's your job search overview.
+            </p>
+
+        </div>
+
+
+        <a
+            href="#"
+            class="btn btn-dark"
+        >
+            + Add Application
+        </a>
+
+    </div>
+
+
+    <!-- Statistics -->
+
+    <div class="row g-4 mb-4">
+
+        <!-- Total -->
+
+        <div class="col-12 col-sm-6 col-xl-3">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <div class="d-flex
+                                justify-content-between
+                                align-items-start">
+
+                        <div>
+
+                            <p class="text-muted mb-2">
+                                Total Applications
+                            </p>
+
+                            <h2 class="fw-bold mb-0">
+                                0
+                            </h2>
+
+                        </div>
+
+                        <span class="badge text-bg-dark rounded-pill">
+                            Total
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Applied -->
+
+        <div class="col-12 col-sm-6 col-xl-3">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <p class="text-muted mb-2">
+                        Applied
+                    </p>
+
+                    <h2 class="fw-bold mb-0">
+                        0
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Interviews -->
+
+        <div class="col-12 col-sm-6 col-xl-3">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <p class="text-muted mb-2">
+                        Interviews
+                    </p>
+
+                    <h2 class="fw-bold mb-0">
+                        0
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Offers -->
+
+        <div class="col-12 col-sm-6 col-xl-3">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <p class="text-muted mb-2">
+                        Offers
+                    </p>
+
+                    <h2 class="fw-bold mb-0">
+                        0
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Main Content -->
+
+    <div class="row g-4">
+
+        <!-- Recent Applications -->
+
+        <div class="col-12 col-lg-8">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-header bg-white border-0 p-4">
+
+                    <div class="d-flex
+                                justify-content-between
+                                align-items-center">
+
+                        <div>
+
+                            <h5 class="fw-bold mb-1">
+                                Recent Applications
+                            </h5>
+
+                            <p class="text-muted mb-0 small">
+                                Your latest job applications.
+                            </p>
+
+                        </div>
+
+                        <a
+                            href="#"
+                            class="btn btn-sm btn-outline-dark"
+                        >
+                            View All
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card-body p-0">
+
+                    <div class="table-responsive">
+
+                        <table class="table
+                                      table-hover
+                                      align-middle
+                                      mb-0">
+
+                            <thead class="table-light">
+
+                                <tr>
+
+                                    <th class="px-4">
+                                        Company
+                                    </th>
+
+                                    <th>
+                                        Position
+                                    </th>
+
+                                    <th>
+                                        Status
+                                    </th>
+
+                                    <th>
+                                        Applied
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                <tr>
+
+                                    <td class="px-4">
+                                        <strong>
+                                            No applications
+                                        </strong>
+                                    </td>
+
+                                    <td class="text-muted">
+                                        —
+                                    </td>
+
+                                    <td>
+                                        <span class="badge
+                                                     text-bg-secondary">
+                                            —
+                                        </span>
+                                    </td>
+
+                                    <td class="text-muted">
+                                        —
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Application Status -->
+
+        <div class="col-12 col-lg-4">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body p-4">
+
+                    <h5 class="fw-bold mb-4">
+                        Application Status
+                    </h5>
+
+
+                    <div class="d-flex
+                                justify-content-between
+                                mb-3">
+
+                        <span>
+                            Applied
+                        </span>
+
+                        <span class="badge text-bg-primary">
+                            0
+                        </span>
+
+                    </div>
+
+
+                    <div class="d-flex
+                                justify-content-between
+                                mb-3">
+
+                        <span>
+                            Screening
+                        </span>
+
+                        <span class="badge text-bg-info">
+                            0
+                        </span>
+
+                    </div>
+
+
+                    <div class="d-flex
+                                justify-content-between
+                                mb-3">
+
+                        <span>
+                            Interview
+                        </span>
+
+                        <span class="badge text-bg-warning">
+                            0
+                        </span>
+
+                    </div>
+
+
+                    <div class="d-flex
+                                justify-content-between
+                                mb-3">
+
+                        <span>
+                            Offer
+                        </span>
+
+                        <span class="badge text-bg-success">
+                            0
+                        </span>
+
+                    </div>
+
+
+                    <div class="d-flex
+                                justify-content-between">
+
+                        <span>
+                            Rejected
+                        </span>
+
+                        <span class="badge text-bg-danger">
+                            0
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
