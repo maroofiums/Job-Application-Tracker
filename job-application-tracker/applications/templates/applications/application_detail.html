@@ -1,0 +1,273 @@
+{% extends "base.html" %}
+
+{% block title %}{{ application.position }} | JobTrack{% endblock %}
+
+{% block content %}
+
+<div class="container py-4 py-lg-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <a
+                href="{% url 'application_list' %}"
+                class="text-decoration-none text-muted"
+            >
+                ← Applications
+            </a>
+
+            <h1 class="fw-bold mt-2 mb-1">
+                {{ application.position }}
+            </h1>
+
+            <p class="text-muted mb-0">
+                {{ application.company.name }}
+            </p>
+
+        </div>
+
+
+        <div class="d-flex gap-2">
+
+            <a
+                href="{% url 'application_update' application.pk %}"
+                class="btn btn-outline-dark"
+            >
+                Edit
+            </a>
+
+            <a
+                href="{% url 'application_delete' application.pk %}"
+                class="btn btn-outline-danger"
+            >
+                Delete
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="row g-4">
+
+        <div class="col-lg-8">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body p-4">
+
+                    <h5 class="fw-bold mb-4">
+                        Application Details
+                    </h5>
+
+
+                    <div class="row g-4">
+
+                        <div class="col-md-6">
+
+                            <small class="text-muted">
+                                Company
+                            </small>
+
+                            <div class="fw-semibold">
+                                {{ application.company.name }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <small class="text-muted">
+                                Position
+                            </small>
+
+                            <div class="fw-semibold">
+                                {{ application.position }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <small class="text-muted">
+                                Status
+                            </small>
+
+                            <div class="mt-1">
+
+                                <span class="badge text-bg-primary">
+                                    {{ application.get_status_display }}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <small class="text-muted">
+                                Employment Type
+                            </small>
+
+                            <div class="fw-semibold">
+                                {{ application.get_employment_type_display }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <small class="text-muted">
+                                Location
+                            </small>
+
+                            <div class="fw-semibold">
+                                {{ application.location|default:"Not specified" }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <small class="text-muted">
+                                Applied
+                            </small>
+
+                            <div class="fw-semibold">
+                                {{ application.applied_at|date:"M d, Y" }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-12">
+
+                            <small class="text-muted">
+                                Job URL
+                            </small>
+
+                            <div>
+
+                                {% if application.job_url %}
+
+                                    <a
+                                        href="{{ application.job_url }}"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        View Job Posting ↗
+                                    </a>
+
+                                {% else %}
+
+                                    <span class="text-muted">
+                                        Not provided
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="card border-0 shadow-sm mt-4">
+
+                <div class="card-body p-4">
+
+                    <h5 class="fw-bold mb-3">
+                        Notes
+                    </h5>
+
+                    {% if application.notes %}
+
+                        <p class="mb-0">
+                            {{ application.notes|linebreaksbr }}
+                        </p>
+
+                    {% else %}
+
+                        <p class="text-muted mb-0">
+                            No notes added.
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-4">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body p-4">
+
+                    <h5 class="fw-bold mb-4">
+                        Important Dates
+                    </h5>
+
+                    <div class="mb-3">
+
+                        <small class="text-muted">
+                            Deadline
+                        </small>
+
+                        <div class="fw-semibold">
+                            {{ application.deadline|date:"M d, Y"|default:"Not set" }}
+                        </div>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <small class="text-muted">
+                            Follow-up
+                        </small>
+
+                        <div class="fw-semibold">
+                            {{ application.follow_up_date|date:"M d, Y"|default:"Not set" }}
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <small class="text-muted">
+                            Contact
+                        </small>
+
+                        <div class="fw-semibold">
+                            {{ application.contact_person|default:"Not provided" }}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

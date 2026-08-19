@@ -1,0 +1,280 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} | JobTrack{% endblock %}
+
+{% block content %}
+
+<div class="container py-4 py-lg-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-12 col-lg-9">
+
+            <div class="mb-4">
+
+                <h1 class="fw-bold">
+                    {{ title }}
+                </h1>
+
+                <p class="text-muted">
+                    Add details about the job opportunity.
+                </p>
+
+            </div>
+
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body p-4 p-lg-5">
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+
+                        {% if form.non_field_errors %}
+
+                            <div class="alert alert-danger">
+                                {{ form.non_field_errors }}
+                            </div>
+
+                        {% endif %}
+
+
+                        <!-- Job Information -->
+
+                        <h5 class="fw-bold mb-3">
+                            Job Information
+                        </h5>
+
+                        <hr class="mb-4">
+
+
+                        <div class="row g-3">
+
+
+                            <div class="col-md-6">
+
+                                <label class="form-label fw-semibold">
+                                    Company
+                                </label>
+
+                                {{ form.company }}
+
+                                {% for error in form.company.errors %}
+                                    <div class="text-danger small">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label class="form-label fw-semibold">
+                                    Position
+                                </label>
+
+                                {{ form.position }}
+
+                                {% for error in form.position.errors %}
+                                    <div class="text-danger small">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+
+
+                            <div class="col-12">
+
+                                <label class="form-label fw-semibold">
+                                    Job URL
+                                </label>
+
+                                {{ form.job_url }}
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label class="form-label fw-semibold">
+                                    Status
+                                </label>
+
+                                {{ form.status }}
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label class="form-label fw-semibold">
+                                    Employment Type
+                                </label>
+
+                                {{ form.employment_type }}
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label class="form-label fw-semibold">
+                                    Location
+                                </label>
+
+                                {{ form.location }}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Salary -->
+
+                        <h5 class="fw-bold mt-5 mb-3">
+                            Salary
+                        </h5>
+
+                        <hr class="mb-4">
+
+
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+
+                                <label class="form-label fw-semibold">
+                                    Minimum Salary
+                                </label>
+
+                                {{ form.salary_min }}
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label class="form-label fw-semibold">
+                                    Maximum Salary
+                                </label>
+
+                                {{ form.salary_max }}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Dates -->
+
+                        <h5 class="fw-bold mt-5 mb-3">
+                            Dates
+                        </h5>
+
+                        <hr class="mb-4">
+
+
+                        <div class="row g-3">
+
+                            <div class="col-md-4">
+
+                                <label class="form-label fw-semibold">
+                                    Applied Date
+                                </label>
+
+                                {{ form.applied_at }}
+
+                            </div>
+
+
+                            <div class="col-md-4">
+
+                                <label class="form-label fw-semibold">
+                                    Deadline
+                                </label>
+
+                                {{ form.deadline }}
+
+                            </div>
+
+
+                            <div class="col-md-4">
+
+                                <label class="form-label fw-semibold">
+                                    Follow-up Date
+                                </label>
+
+                                {{ form.follow_up_date }}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Contact -->
+
+                        <h5 class="fw-bold mt-5 mb-3">
+                            Contact & Notes
+                        </h5>
+
+                        <hr class="mb-4">
+
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-semibold">
+                                Contact Person
+                            </label>
+
+                            {{ form.contact_person }}
+
+                        </div>
+
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-semibold">
+                                Notes
+                            </label>
+
+                            {{ form.notes }}
+
+                        </div>
+
+
+                        <!-- Actions -->
+
+                        <div class="d-flex gap-2">
+
+                            <button
+                                type="submit"
+                                class="btn btn-dark px-4"
+                            >
+                                Save Application
+                            </button>
+
+                            <a
+                                href="{% url 'application_list' %}"
+                                class="btn btn-outline-secondary"
+                            >
+                                Cancel
+                            </a>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

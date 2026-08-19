@@ -43,4 +43,4 @@ class ApplicationAdmin(admin.ModelAdmin):
     autocomplete_fields = (
         "company",
         "user"
-    )
+    ) 
