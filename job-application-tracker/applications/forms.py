@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Application
+from .models import Application, Company
 
 class ApplicationForm(forms.ModelForm):
 
@@ -102,3 +102,43 @@ class ApplicationForm(forms.ModelForm):
             ),
         }
 
+
+class CompanyForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Company
+
+        fields = [
+            "name",
+            "website",
+            "industry",
+            "location"
+        ]
+
+        widgets = {
+            "name": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "e.g. Google"
+                }
+            ),
+            "website": forms.URLInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "https://example.com"
+                }
+            ),
+            "industry": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "e.g. Artificial Intelligence"
+                }
+            ),
+            "location": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "e.g. Karachi / Remote"
+                }
+            ),
+        }
