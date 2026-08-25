@@ -1,6 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required 
 from django.shortcuts import render, redirect, get_object_or_404
+from django.db import models
+from django.core.paginator import Paginator
 
 from .models import Application, Company
 from .forms import ApplicationForm, CompanyForm
@@ -15,12 +17,71 @@ def application_list(request):
         .select_related("company")
     )
 
+    # Search
+    search = request.GET.get("search", "").strip()
+
+    if search:
+        applications = applications.filter(
+            models.Q(position__icontains=search)
+            | models.Q(company__name__icontains=search)
+        )
+
+    # Status
+    status = request.GET.get("status", "")
+
+    if status:
+        applications = applications.filter(
+            status=status
+        )
+
+    # Employment Type
+    employment_type = request.GET.get(
+        "employment_type",
+        ""
+    )
+
+    if employment_type:
+        applications = applications.filter(
+            employment_type=employment_type
+        )
+
+    # Latest applications first
+    applications = applications.order_by(
+        "-applied_at"
+    )
+
+    # Pagination
+    paginator = Paginator(
+        applications,
+        10
+    )
+
+    page_number = request.GET.get("page")
+
+    page_obj = paginator.get_page(
+        page_number
+    )
+
+    context = {
+        "page_obj": page_obj,
+
+        "search": search,
+
+        "selected_status": status,
+
+        "selected_employment_type": employment_type,
+
+        "status_choices": Application.Status.choices,
+
+        "employment_choices": (
+            Application.EmploymentType.choices
+        ),
+    }
+
     return render(
         request,
         "applications/application_list.html",
-        {
-            "applications": applications
-        },
+        context,
     )
 
 
