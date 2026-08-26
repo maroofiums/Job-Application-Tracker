@@ -1,0 +1,285 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Interviews | JobTrack
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<div class="container py-4 py-lg-5">
+
+
+    <!-- Header -->
+
+
+    <div class="d-flex
+                flex-column
+                flex-md-row
+                justify-content-between
+                align-items-md-center
+                gap-3
+                mb-4">
+
+
+        <div>
+
+            <h1 class="fw-bold mb-1">
+                Interviews
+            </h1>
+
+
+            <p class="text-muted mb-0">
+                Manage your upcoming and completed interviews.
+            </p>
+
+
+        </div>
+
+
+
+        <a
+            href="{% url 'interview_create' %}"
+            class="btn btn-dark"
+        >
+
+            + Add Interview
+
+        </a>
+
+
+    </div>
+
+
+
+
+
+    <!-- Messages -->
+
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+        <div class="alert alert-success">
+
+            {{ message }}
+
+        </div>
+
+
+        {% endfor %}
+
+    {% endif %}
+
+
+
+
+
+
+    <!-- Interview Cards -->
+
+
+    <div class="row g-4">
+
+
+
+    {% for interview in interviews %}
+
+
+
+        <div class="col-12 col-md-6 col-lg-4">
+
+
+            <div class="card border-0 shadow-sm h-100">
+
+
+
+                <div class="card-body p-4">
+
+
+
+                    <div class="d-flex
+                                justify-content-between
+                                align-items-start
+                                mb-3">
+
+
+                        <span class="badge text-bg-warning">
+
+                            {{ interview.get_interview_type_display }}
+
+                        </span>
+
+
+
+                        <span class="text-muted small">
+
+                            {{ interview.date|date:"M d, Y" }}
+
+                        </span>
+
+
+
+                    </div>
+
+
+
+
+
+
+                    <h5 class="fw-bold">
+
+                        {{ interview.application.company.name }}
+
+                    </h5>
+
+
+
+                    <p class="mb-2">
+
+                        {{ interview.application.position }}
+
+                    </p>
+
+
+
+
+
+                    <p class="text-muted small mb-2">
+
+                        Time:
+
+                        {{ interview.date|date:"h:i A" }}
+
+                    </p>
+
+
+
+
+
+                    {% if interview.interviewer %}
+
+
+                    <p class="text-muted small">
+
+                        Interviewer:
+
+                        {{ interview.interviewer }}
+
+                    </p>
+
+
+                    {% endif %}
+
+
+
+
+                    <hr>
+
+
+
+                    <div class="d-flex gap-2">
+
+
+                        <a
+                            href="{% url 'interview_detail' interview.pk %}"
+                            class="btn btn-sm btn-outline-dark"
+                        >
+
+                            View
+
+                        </a>
+
+
+
+                        <a
+                            href="{% url 'interview_update' interview.pk %}"
+                            class="btn btn-sm btn-outline-primary"
+                        >
+
+                            Edit
+
+                        </a>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+    {% empty %}
+
+
+
+        <div class="col-12">
+
+
+            <div class="card border-0 shadow-sm">
+
+
+                <div class="card-body text-center p-5">
+
+
+                    <h4 class="fw-bold">
+
+                        No interviews yet
+
+                    </h4>
+
+
+                    <p class="text-muted">
+
+                        Add your first interview.
+
+                    </p>
+
+
+
+                    <a
+                        href="{% url 'interview_create' %}"
+                        class="btn btn-dark"
+                    >
+
+                        Add Interview
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+    {% endfor %}
+
+
+
+    </div>
+
+
+</div>
+
+
+
+{% endblock %}

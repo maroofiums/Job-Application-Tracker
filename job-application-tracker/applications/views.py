@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db import models
+from django.db.models import Count, Max
 from django.core.paginator import Paginator
 
 from .models import Application, Company
@@ -205,17 +206,52 @@ def application_delete(request, pk):
 
 @login_required
 def company_list(request):
+    companies = Company.objects.filter(
+        owner=request.user
+    )
 
-    companies = (
-        Company.objects
-        .filter(owner=request.user)
+    search = request.GET.get(
+        "search",
+        ""
+    ).strip()
+
+    if search:
+        companies = companies.filter(
+            name__icontains=search
+        )
+
+    companies = companies.annotate(
+
+        application_count=Count(
+            "applications"
+        ),
+
+        last_application=Max(
+            "applications__applied_at"
+        )
+
+    )
+
+    companies = companies.order_by(
+        "name"
+    )
+    paginator = Paginator(
+        companies,
+        9
+    )
+    page_number = request.GET.get(
+        "page"
+    )
+    page_obj = paginator.get_page(
+        page_number
     )
 
     return render(
         request,
         "applications/company_list.html",
         {
-            "companies": companies,
+            "page_obj": page_obj,
+            "search": search,
         },
     )
 
