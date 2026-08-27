@@ -514,11 +514,11 @@ Production:
 ## 1. Clone Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/jobtrack.git
+git clone https://github.com/maroofiums/Job-Application-Tracker.git
 ```
 
 ```bash
-cd jobtrack
+cd job-application-tracker
 ```
 
 ---
